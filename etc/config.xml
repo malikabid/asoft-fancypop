@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <fancypopup>
+            <general>
+                <enable>1</enable>
+            </general>
+            <popup>
+                <show_on>1</show_on>
+                <show_once_per_session>0</show_once_per_session>
+                <session_lifetime>86400</session_lifetime>
+                <delay>0</delay>
+                <width>500</width>
+                <height>500</height>
+                <bg_color>transparent</bg_color>
+                <content>
+                    <![CDATA[
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p style="text-align:right;margin:0px auto;"><a href="#">Let's Rock >></a></p>
+                    ]]>
+                </content>
+                <custom_style>
+                    <![CDATA[#popup_content .block-content img {margin: 30px; float: left;}
+#popup_content .block-content p {padding: 40px; line-height: 30px; text-align: justify;}]]>
+                </custom_style>
+                <link_to_page_type>0</link_to_page_type>
+            </popup>
+        </fancypopup>
+    </default>
+</config>

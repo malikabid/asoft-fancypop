@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="asoft_fancypop" translate="label" sortOrder="10">
+            <label>Fancy Popup</label>
+        </tab>
+
+        <section id="fancypopup" translate="label" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Fancy Popup</label>
+            <tab>asoft</tab>
+            <resource>Asoft_Fancypop::config</resource>
+            <group id="general" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="popup" translate="label" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Popup Settings</label>
+                
+                <field id="show_on" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show on</label>
+                    <source_model>Asoft\Fancypop\Model\Config\Settings\Popup\ShowOn</source_model>
+                </field>
+                <field id="show_once_per_session" translate="label" type="select" sortOrder="101" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show once per session</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="session_lifetime" translate="label comment" type="text" sortOrder="102" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Session Lifetime (seconds)</label>
+                    <comment><![CDATA[86400 seconds in 1 day]]></comment>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="*/*/show_once_per_session">1</field>
+                    </depends>
+                </field>
+
+                <field id="active_from" translate="label comment" type="date" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Active from</label>
+                    <frontend_model>Asoft\Fancypop\Block\Adminhtml\System\Config\Date</frontend_model>
+                </field>
+                
+                <field id="active_to" translate="label comment" type="date" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Active to</label>
+                    <frontend_model>Asoft\Fancypop\Block\Adminhtml\System\Config\Date</frontend_model>
+                </field>
+
+                <field id="delay" translate="label comment" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delay(miliseconds)</label>
+                    <validate>validate-number</validate>
+                </field>
+
+                <field id="logo_src" translate="label" type="image" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Logo Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG, SVG.</comment>
+                    <backend_model>Asoft\Fancypop\Model\Config\Backend\Image\Popuplogo</backend_model>
+                    <base_url type="media" scope_info="1">asoft/fancypop/logo</base_url>
+                </field>
+                <field id="content" translate="label comment" type="textarea" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Content Text</label>
+                </field>
+
+                <field id="bg_color" translate="label comment" type="text" sortOrder="160" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Backgroud Color</label>
+                    <frontend_model>Asoft\Fancypop\Block\System\Config\Form\Field\Color</frontend_model>
+                    <comment>
+                        <![CDATA[Use color pallete or enter Color Name e.g., black / Hexa Code e.g., #000 manually. 
+                        For transparent enter 'transparent']]>
+                    </comment>
+                </field>
+                <field id="bg_image" translate="label" type="image" sortOrder="170" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Background Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG.</comment>
+                    <backend_model>Asoft\Fancypop\Model\Config\Backend\Image\Popupbg</backend_model>
+                    <base_url type="media" scope_info="1">asoft/fancypop/background</base_url>
+                </field>
+
+                <field id="width" translate="label comment" type="text" sortOrder="180" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Width</label>
+                    <validate>required-entry validate-number</validate>
+                </field>
+                <field id="height" translate="label comment" type="text" sortOrder="190" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Height</label>
+                    <validate>required-entry validate-number</validate>
+                </field>
+                <field id="custom_style" translate="label comment" type="textarea" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Style</label>
+                </field>
+
+                <field id="link_to_page_type" translate="label" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link to page Type</label>
+                    <source_model>Asoft\Fancypop\Model\Config\Source\PageTypes</source_model>
+                </field>
+                <field id="link_to_cms_page" translate="label" type="select" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link to CMS page</label>
+                    <source_model>Magento\Cms\Model\Config\Source\Page</source_model>
+                    <depends>
+                        <field id="*/*/link_to_page_type">1</field>
+                    </depends>
+                </field>
+                <field id="link_to_category" translate="label" type="select" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link to Category</label>
+                    <source_model>Asoft\Fancypop\Model\Config\Source\CategoryList</source_model>
+                    <depends>
+                        <field id="*/*/link_to_page_type">2</field>
+                    </depends>
+                </field>
+                <field id="link_to_other_page" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Link to Other page</label>
+                    <depends>
+                        <field id="*/*/link_to_page_type">-1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

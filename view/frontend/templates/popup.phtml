@@ -1,0 +1,96 @@
+<?php
+    
+    $_helper = $this->helper('Asoft\Fancypop\Helper\Data');
+    $popup = $_helper->getConfig('fancypopup/popup');
+    $page_url = $_helper->getLinkPageUrl();
+
+    $showPopupToday = $_helper->isTodayInRange();
+?>
+
+
+<?php if ($showPopupToday) {?>
+<div id="popup_content" class="popup" style="display: none;"
+    <?php if($page_url){?>
+        onclick="location.href='<?php echo $page_url; ?>'"
+    <?php }?>
+    >
+    <div class="block-content">
+        <?php
+            if (isset($popup["logo_src"]) && $popup["logo_src"]) {
+                $folderName = \Asoft\Fancypop\Model\Config\Backend\Image\Popuplogo::UPLOAD_DIR;
+                $path = $folderName . '/' . $popup["logo_src"];
+                $logoUrl = $_helper->getBaseUrl() . $path;
+                ?>
+                <img src="<?php echo $logoUrl; ?>" alt="" class="logo_img"/>
+                <?php
+            }
+            ?>
+
+        <?php echo $popup["content"]; ?>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+require(['jquery', 'fancybox'], function($, fancybox) {
+    $(document).ready(function() {
+        <?php if($popup['show_on'] == 1): /* show on home page */?>
+            if ($("body").hasClass("cms-index-index")) {
+        <?php endif;?>
+            <?php if ($popup['show_once_per_session'] == 1): /* show once per session only */?>
+                var check_cookie = $.cookie('asoft_fancypopup');
+                if(check_cookie != 'dontshowitagain' ){
+            <?php endif; ?>
+                    setTimeout(function () {
+                        showPopup();
+                    }, <?php echo $popup['delay']; ?>);
+            <?php if ($popup['show_once_per_session'] == 1): /* show once per session only */?>
+                    var date = new Date();
+                    date.setTime(date.getTime() + (<?php echo $popup['session_lifetime']?> * 1000));
+                    $.cookie('asoft_fancypopup', 'dontshowitagain',{expires:date});
+                }
+            <?php endif; ?>
+        <?php if($popup['show_on'] == 1): /* show on home page */ ?>
+            }
+        <?php endif;?>
+    });
+
+    function showPopup() {
+        $.fancybox({
+            'padding': '0px',
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'type': 'inline',
+            'href': '#popup_content',
+            'width': '<?php echo $popup['height']; ?>',
+            'height': '<?php echo $popup['width']; ?>',
+            'autoSize': false,
+            'aspectRatio': true
+
+        });
+    }
+});
+</script>
+
+<style type="text/css">
+    #popup_content {
+        width: 100%;
+        height: 100%;
+
+        <?php if(isset($popup['bg_color'])){
+            echo "background-color:".$popup['bg_color'].";";
+        }?>
+        <?php if(isset($popup["bg_image"]) && $popup["bg_image"]) :
+            $folderName=\Asoft\Fancypop\Model\Config\Backend\Image\Popupbg::UPLOAD_DIR;
+            $path=$folderName . '/'. $popup["bg_image"];
+            $imageUrl=$_helper->getBaseUrl() . $path;
+            ?>background: url(<?php echo $imageUrl ?>);
+            background-size: 100% 100%;
+        <?php endif; ?>
+        <?php if($page_url):?>
+            cursor: pointer;
+        <?php endif;?>
+    }
+    <?php echo $popup['custom_style'];?>
+</style>
+<?php } ?>

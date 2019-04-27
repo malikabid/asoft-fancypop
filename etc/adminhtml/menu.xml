@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+
+        <add id="Asoft_Fancypop::settings" 
+        title="Fancy Popup Settings" 
+        module="Asoft_Fancypop" 
+        resource="Asoft_Fancypop::settings" sortOrder="100" action="adminhtml/system_config/edit/section/fancypop" 
+        parent="Asoft_Core::core"
+        />
+
+    </menu>
+
+</config>
